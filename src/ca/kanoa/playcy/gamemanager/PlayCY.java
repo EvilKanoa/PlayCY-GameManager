@@ -34,6 +34,7 @@ public class PlayCY extends JavaPlugin {
 		/* Register listeners, executor, etc */
 		getCommand("playcy").setExecutor(new CommandExecutor());
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Updater(), 0, 10);
+		Bukkit.getPluginManager().registerEvents(new Listener(), this);
 	}
 	
 	@Override
