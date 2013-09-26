@@ -1,0 +1,11 @@
+#This is where you can put the locations where the plugin should check and update signs
+# locations can also be added by using a command.
+locations:
+    #The name does NOT matter, it's just for the plugin
+    spleef_1:
+        #The world to check in
+        world: world
+        #The coords at where the sign should be
+        x: 0
+        y: 60
+        z: 0
