@@ -7,8 +7,16 @@ public class Command {
 
 	private String command;
 	
+	/**
+	 * Creates a new Command object
+	 * @param command The command that will be ran when this is executed
+	 */
 	public Command(String command) {
-		this.command = command;
+		if (command.startsWith("/")) {
+			this.command = command.substring(1);
+		} else {
+			this.command = command;
+		}
 	}
 	
 	public void execute(Player player) {

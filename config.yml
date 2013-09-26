@@ -3,9 +3,12 @@ signs:
     #The part the plugin uses to organize it, doesn't really mater what it is, just no spaces.
     spleef_1: 
         #The name that will go on the actual sign like so [NAME]
+        # to make a sign for the one below you would make it say [Spleef 1] on the top line
         name: Spleef 1
-        #The command that will be executed when the player clicks the sign and it isn't full
-        command: /tp %PLAYER% 12 34 65
+        #The commands that will be executed when the player clicks the sign and it isn't full
+        commands: 
+        - /tp %PLAYER% 12 34 65
+        - /heal %PLAYER%
         #The world to check for the number of players
         world: spleef_1
         #The maximum number of players allowed in the world before we won't let them use the sign
