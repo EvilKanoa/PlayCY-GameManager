@@ -1,3 +1,6 @@
+#Messages go here
+server-full: The server you're trying to join is currently full!
+server-offline: The server you're trying to join is offline!
 #All info about the signs goes inside this section
 signs:
     #The part the plugin uses to organize it, doesn't really mater what it is, just no spaces.

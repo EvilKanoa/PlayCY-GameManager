@@ -38,14 +38,24 @@ public class SignInfo {
 		return maxPlayers;
 	}
 	
+	public boolean checkSign(Sign sign) {
+		return sign.getLine(0).contains("[" + name + "]");
+	}
+	
+	public SignState getState() {
+		if (Bukkit.getWorld(world) == null) {
+			return SignState.OFFLINE;
+		} else if (Bukkit.getWorld(world).getPlayers().size() >= maxPlayers) {
+			return SignState.FULL;
+		} else {
+			return SignState.JOINABLE;
+		}
+	}
+	
 	public void execute(Player player) {
 		for (Command command : commands) {
 			command.execute(player);
 		}
-	}
-	
-	public boolean checkSign(Sign sign) {
-		return sign.getLine(0).contains("[" + name + "]");
 	}
 	
 	public void updateSign(Sign sign) {
@@ -62,6 +72,12 @@ public class SignInfo {
 			sign.setLine(3, ChatColor.GREEN + "Joinable");
 		}
 		sign.update();
+	}
+	
+	public enum SignState {
+		FULL,
+		OFFLINE,
+		JOINABLE;
 	}
 	
 }
