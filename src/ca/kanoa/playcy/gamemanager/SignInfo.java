@@ -95,6 +95,7 @@ public class SignInfo {
 	public enum SignState {
 		FULL,
 		OFFLINE,
+		INGAME,
 		JOINABLE;
 	}
 	
