@@ -4,7 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
 
-public class Updater implements Runnable {
+public class SignUpdater implements Runnable {
 
 	@Override
 	public void run() {

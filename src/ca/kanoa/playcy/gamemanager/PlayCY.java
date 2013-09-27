@@ -40,7 +40,8 @@ public class PlayCY extends JavaPlugin {
 
 		/* Register listeners, executor, etc */
 		getCommand("playcy").setExecutor(new CommandExecutor());
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Updater(), 0, 10);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new SignUpdater(), 0, 10);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new WorldUpdater(), 0, 20);
 		Bukkit.getPluginManager().registerEvents(new Listener(), this);
 	}
 

@@ -2,6 +2,7 @@ package ca.kanoa.playcy.gamemanager;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 
@@ -11,6 +12,7 @@ public class SignInfo {
 	private String name;
 	private String world;
 	private int maxPlayers;
+	private boolean beenPlayed;
 	
 	/**
 	 * Creates a new sign object
@@ -24,6 +26,7 @@ public class SignInfo {
 		this.name = name;
 		this.world = world;
 		this.maxPlayers = maxPlayers;
+		this.beenPlayed = false;
 	}
 
 	public Command[] getCommands() {
@@ -72,6 +75,21 @@ public class SignInfo {
 			sign.setLine(3, ChatColor.GREEN + "Joinable");
 		}
 		sign.update();
+	}
+	
+	public void updateWorld() {
+		World worldObj = Bukkit.getWorld(this.world);
+		if (worldObj != null && worldObj.getPlayers().size() > 0) {
+			beenPlayed = true;
+		} else if (worldObj != null && worldObj.getPlayers().size() == 0 && 
+				beenPlayed) {
+			WorldLoader.unload(world);
+			WorldLoader.load(world);
+			beenPlayed = false;
+		} else if (worldObj == null) {
+			WorldLoader.load(this.world);
+			beenPlayed = false;
+		}
 	}
 	
 	public enum SignState {

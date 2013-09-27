@@ -1,9 +1,9 @@
 name: PlayCY-GameManager
 main: ca.kanoa.playcy.gamemanager.PlayCY
-version: 0.00.0000
+version: 0.01.0001
 author: 12323op
 commands:
     playcy:
         description: PlayCY main plugin command base
-        usage: /playcy <version/addloc>
+        usage: /playcy <version/addloc {x} {y} {z}/reload/tp {player} {world} {x} {y} {z}>
         aliases: [sign, signs, cy]
