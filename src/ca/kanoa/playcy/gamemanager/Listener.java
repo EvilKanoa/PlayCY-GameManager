@@ -18,8 +18,9 @@ public class Listener implements org.bukkit.event.Listener {
 			return;
 		}
 		Block block = event.getClickedBlock();
-		if (block.getType() == Material.SIGN || block.getType() == 
-				Material.SIGN_POST) {
+		if (block.getType() == Material.SIGN || 
+				block.getType() == Material.SIGN_POST ||
+				block.getType() == Material.WALL_SIGN) {
 			SignInfo info = PlayCY.getInstance().getSignInfo((Sign) 
 					block.getState());
 			if (info == null) {

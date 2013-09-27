@@ -13,6 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class PlayCY extends JavaPlugin {
 
 	protected FileConfiguration config;
+	public FileConfiguration locationConfig;
 	public Set<Location> locations;
 	public Set<SignInfo> signs;
 	private static PlayCY instance;
@@ -30,8 +31,10 @@ public class PlayCY extends JavaPlugin {
 			saveResource("locations.yml", false);                              //Save the locations file (including my comments)
 		}
 		config = getConfig();
-		locations = Utils.parseLocationConfig(YamlConfiguration.
-				loadConfiguration(new File(getDataFolder(), "locations.yml")).
+		locationConfig = YamlConfiguration.loadConfiguration(new File(getDataFolder(), 
+				"locations.yml"));
+		locations = Utils.parseLocationConfig(
+				locationConfig.
 				getConfigurationSection("locations"));
 		signs = Utils.parseSignConfig(config.getConfigurationSection("signs"));
 

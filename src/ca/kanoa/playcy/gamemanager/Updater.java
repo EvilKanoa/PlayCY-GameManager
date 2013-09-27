@@ -10,8 +10,9 @@ public class Updater implements Runnable {
 	public void run() {
 		for (Location loc : PlayCY.getInstance().locations) {
 			try {
-				if (loc.getBlock().getType() == Material.SIGN || 
-						loc.getBlock().getType() == Material.SIGN_POST) {
+				if (loc.getBlock().getType() == Material.WALL_SIGN || 
+						loc.getBlock().getType() == Material.SIGN_POST ||
+						loc.getBlock().getType() == Material.SIGN) {
 					Sign sign = (Sign) loc.getBlock().getState();
 					SignInfo info = PlayCY.getInstance().getSignInfo(sign);
 					if (info == null) {
