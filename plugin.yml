@@ -5,5 +5,5 @@ author: 12323op
 commands:
     playcy:
         description: PlayCY main plugin command base
-        usage: /playcy <arguments>
+        usage: /playcy <version/addloc>
         aliases: [sign, signs, cy]
