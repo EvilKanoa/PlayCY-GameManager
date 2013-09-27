@@ -30,6 +30,14 @@ public class SignInfo {
 		return commands;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
+	public int getMaxPlayers() {
+		return maxPlayers;
+	}
+	
 	public void execute(Player player) {
 		for (Command command : commands) {
 			command.execute(player);
@@ -53,6 +61,7 @@ public class SignInfo {
 		} else {
 			sign.setLine(3, ChatColor.GREEN + "Joinable");
 		}
+		sign.update();
 	}
 	
 }

@@ -1,6 +1,5 @@
 package ca.kanoa.playcy.gamemanager;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,17 +26,17 @@ public class Utils {
 		return locations;
 	}
 
-	public static HashMap<String, SignInfo> parseSignConfig(
+	public static Set<SignInfo> parseSignConfig(
 			ConfigurationSection config) {
-		HashMap<String, SignInfo> signs = new HashMap<String, SignInfo>();
+		Set<SignInfo> signs = new HashSet<SignInfo>();
 		for (String s : config.getKeys(false)) {
-			signs.put(config.getString(s + ".name"), new SignInfo(
+			signs.add(new SignInfo(
 					getCommands(config.getStringList(s + ".commands")),
 					config.getString(s + ".name"),
 					config.getString(s + ".world"),
-					config.getInt(s + ".maxPlayers")));
+					config.getInt(s + ".max-players")));
 		}
-		return null;
+		return signs;
 	}
 
 	private static Command[] getCommands(List<String> list) {

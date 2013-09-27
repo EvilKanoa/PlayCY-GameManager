@@ -9,13 +9,18 @@ public class Updater implements Runnable {
 	@Override
 	public void run() {
 		for (Location loc : PlayCY.getInstance().locations) {
-			if (loc.getBlock().getType() == Material.SIGN) {
-				Sign sign = (Sign) loc.getBlock().getState();
-				SignInfo info = PlayCY.getInstance().getSign(sign.getLine(0).replace("[", "").replace("]", ""));
-				if (info == null) {
-					continue;
+			try {
+				if (loc.getBlock().getType() == Material.SIGN || 
+						loc.getBlock().getType() == Material.SIGN_POST) {
+					Sign sign = (Sign) loc.getBlock().getState();
+					SignInfo info = PlayCY.getInstance().getSignInfo(sign);
+					if (info == null) {
+						continue;
+					}
+					info.updateSign(sign);
 				}
-				info.updateSign(sign);
+			} catch (NullPointerException e) {
+				continue;
 			}
 		}
 	}
