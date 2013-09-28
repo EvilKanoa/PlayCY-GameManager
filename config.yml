@@ -1,6 +1,7 @@
 #Messages go here
 server-full: The server you're trying to join is currently full!
 server-offline: The server you're trying to join is offline!
+server-ingame: The server you're trying to join is in-game!
 #All info about the signs goes inside this section
 signs:
     #The part the plugin uses to organize it, doesn't really mater what it is, just no spaces.
@@ -11,8 +12,19 @@ signs:
         #The commands that will be executed when the player clicks the sign and it isn't full
         commands: 
         - /tp %PLAYER% 12 34 65
-        - /heal %PLAYER%
+        - /gamemode 2 &PLAYER%
+        #The commands to run when the lobby ends and the game starts
+        game-start-commands:
+        - /tp %PLAYER% 100 50 -1234
+        - /tell %PLAYER% 3, 2, 1, GO!
         #The world to check for the number of players
         world: spleef_1
         #The maximum number of players allowed in the world before we won't let them use the sign
         max-players: 20
+        #The minimum number of players for the countdown/game to start
+        minimum-players: 3
+        #The time lobby mode lasts, in seconds. (5min = 300sec, 10min = 600sec, 15min = 900sec, 30min = 1800sec)
+        lobby-time: 300
+        #The message that is displayed when the lobby timer is less than 5 (displayed every second)
+        countdown-message: The game starts in %TIME% seconds!
+        

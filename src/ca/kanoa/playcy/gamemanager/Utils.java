@@ -32,9 +32,13 @@ public class Utils {
 		for (String s : config.getKeys(false)) {
 			signs.add(new SignInfo(
 					getCommands(config.getStringList(s + ".commands")),
+					getCommands(config.getStringList(s + ".game-start-commands")),
 					config.getString(s + ".name"),
+					config.getString(s + ".countdown-message"),
 					config.getString(s + ".world"),
-					config.getInt(s + ".max-players")));
+					config.getInt(s + ".max-players"),
+					config.getInt(s + ".minimum-players"),
+					config.getInt(s + ".lobby-time")));
 		}
 		return signs;
 	}

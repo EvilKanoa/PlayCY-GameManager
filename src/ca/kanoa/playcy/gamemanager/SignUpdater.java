@@ -19,6 +19,7 @@ public class SignUpdater implements Runnable {
 						continue;
 					}
 					info.updateSign(sign);
+					info.updateGame();
 				}
 			} catch (NullPointerException e) {
 				continue;

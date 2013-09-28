@@ -32,6 +32,9 @@ public class Listener implements org.bukkit.event.Listener {
 			} else if (info.getState() == SignState.OFFLINE) {
 				event.getPlayer().sendMessage(PlayCY.getInstance().
 						config.getString("server-offline"));
+			} else if (info.getState() == SignState.INGAME) {
+				event.getPlayer().sendMessage(PlayCY.getInstance().
+						config.getString("server-ingame"));
 			} else {
 				info.execute(event.getPlayer());
 			}
