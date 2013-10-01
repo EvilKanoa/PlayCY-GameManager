@@ -9,6 +9,8 @@ import org.bukkit.World;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 
+import ca.kanoa.playcy.gamemanager.Countdown.Time;
+
 public class SignInfo {
 
 	private Command[] commands;
@@ -71,9 +73,16 @@ public class SignInfo {
 		}
 	}
 	
-	public void execute(Player player) {
+	public void execute(final Player player) {
 		for (Command command : commands) {
-			command.execute(player);
+			if (countdown != null) {
+				command.execute(player, Time.convert(countdown.getTimeLeft(), 
+						Time.getTime(countdown.getTimeLeft())), 
+						Time.getTime(countdown.getTimeLeft()));
+			} else {
+				command.execute(player, Time.convert(lobbyTime, 
+						Time.getTime(lobbyTime)), Time.getTime(lobbyTime));
+			}
 		}
 	}
 	
@@ -131,7 +140,7 @@ public class SignInfo {
 		if (ingame == true) {
 			return;
 		}
-		World world = Bukkit.getWorld(this.world);
+		final World world = Bukkit.getWorld(this.world);
 		if (world == null) {
 			return;
 		} else if (getOnlinePlayers(world.getPlayers()) >= minPlayers && 
@@ -143,6 +152,9 @@ public class SignInfo {
 					if (type == Time.SECOND && time <= 5) {
 						broadcastToWorld(countdownMessage.replace("%TIME%", Long.toString(time)));
 						broadcastToWorld(Sound.CLICK);
+					}
+					for (Player p : world.getPlayers()) {
+						p.setExp((float) getTimeLeft() / (float) getLength());
 					}
 				}
 				

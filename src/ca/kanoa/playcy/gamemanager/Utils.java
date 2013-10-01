@@ -34,7 +34,7 @@ public class Utils {
 					getCommands(config.getStringList(s + ".commands")),
 					getCommands(config.getStringList(s + ".game-start-commands")),
 					config.getString(s + ".name"),
-					config.getString(s + ".countdown-message"),
+					colors(config.getString(s + ".countdown-message")),
 					config.getString(s + ".world"),
 					config.getInt(s + ".max-players"),
 					config.getInt(s + ".minimum-players"),
@@ -42,11 +42,15 @@ public class Utils {
 		}
 		return signs;
 	}
+	
+	public static String colors(String str) {
+		return str.replace('&', '\u00A7');
+	}
 
 	private static Command[] getCommands(List<String> list) {
 		Command[] commands = new Command[list.size()];
 		for (int i = 0; i < list.size(); i++) {
-			commands[i] = new Command(list.get(i));
+			commands[i] = new Command(colors(list.get(i)));
 		}
 		return commands;
 	}

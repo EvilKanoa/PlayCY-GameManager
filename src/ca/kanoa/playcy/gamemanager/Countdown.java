@@ -85,6 +85,20 @@ public class Countdown implements Runnable {
 			}
 		}
 		
+		public static long convert(long seconds, Time toType) {
+			switch (toType) {
+			case DAY: return seconds / 86400;
+			case HOUR: return seconds / 3600;
+			case MINUTE: return seconds / 60;
+			default: return seconds;
+			}
+		}
+		
+		@Override
+		public String toString() {
+			return super.toString().toLowerCase();
+		}
+		
 	}
 
 }

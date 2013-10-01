@@ -3,6 +3,8 @@ package ca.kanoa.playcy.gamemanager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import ca.kanoa.playcy.gamemanager.Countdown.Time;
+
 public class Command {
 
 	private String command;
@@ -20,7 +22,15 @@ public class Command {
 	}
 	
 	public void execute(Player player) {
-		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("%PLAYER%", player.getName()));
+		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), 
+				command.replace("%PLAYER%", player.getName()));
+	}
+	
+	public void execute(Player player, long time, Time type) {
+		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), 
+				command.replace("%PLAYER%", player.getName()).
+				replace("%TIME%", Long.toString(time)).
+				replace("%TIMETYPE%", type.toString()));
 	}
 	
 }

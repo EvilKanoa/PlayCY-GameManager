@@ -13,6 +13,7 @@ signs:
         commands: 
         - /tp %PLAYER% 12 34 65
         - /gamemode 2 &PLAYER%
+        - /tell %PLAYER% The game starts in %TIME% %TIMETYPE%s!
         #The commands to run when the lobby ends and the game starts
         game-start-commands:
         - /tp %PLAYER% 100 50 -1234
