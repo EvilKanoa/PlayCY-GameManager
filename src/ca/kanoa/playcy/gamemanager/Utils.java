@@ -44,7 +44,11 @@ public class Utils {
 	}
 	
 	public static String colors(String str) {
+		if (str != null) {
 		return str.replace('&', '\u00A7');
+		} else {
+			return "";
+		}
 	}
 
 	private static Command[] getCommands(List<String> list) {

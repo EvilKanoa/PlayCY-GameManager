@@ -16,12 +16,20 @@ public class PlayCY extends JavaPlugin {
 	public FileConfiguration locationConfig;
 	public Set<Location> locations;
 	public Set<SignInfo> signs;
-	private static PlayCY instance;
+	
+	protected CommandExecutor commandExecutor;
+	protected SignUpdater signUpdater;
+	protected WorldUpdater worldUpdater;
+	protected Listener listener;
+	
+	private static PlayCY instance = null;
 
 	@Override
 	public void onEnable() {
 		/* Setup variables */
-		instance = this;
+		if (instance == null) {
+			instance = this;
+		}
 
 		/* Load data from files */
 		if (!new File(getDataFolder(), "config.yml").exists()) {
@@ -39,15 +47,25 @@ public class PlayCY extends JavaPlugin {
 		signs = Utils.parseSignConfig(config.getConfigurationSection("signs"));
 
 		/* Register listeners, executor, etc */
-		getCommand("playcy").setExecutor(new CommandExecutor());
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new SignUpdater(), 0, 10);
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new WorldUpdater(), 0, 20);
-		Bukkit.getPluginManager().registerEvents(new Listener(), this);
+		commandExecutor = new CommandExecutor();
+		getCommand("playcy").setExecutor(commandExecutor);
+		signUpdater = new SignUpdater();
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, signUpdater, 0, 10);
+		worldUpdater = new WorldUpdater();
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, worldUpdater, 0, 20);
+		listener = new Listener();
+		Bukkit.getPluginManager().registerEvents(listener, this);
 	}
-
-	@Override
-	public void onDisable() {
-		instance = null;
+	
+	public void loadFromOld(PlayCY playcy) {
+		config = playcy.config;
+		locationConfig = playcy.locationConfig;
+		locations = playcy.locations;
+		signs = playcy.signs;
+		getCommand("playcy").setExecutor(playcy.commandExecutor);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, playcy.signUpdater, 0, 10);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, playcy.worldUpdater, 0, 20);
+		Bukkit.getPluginManager().registerEvents(playcy.listener, this);
 	}
 
 	public SignInfo getSignInfo(String name) {
